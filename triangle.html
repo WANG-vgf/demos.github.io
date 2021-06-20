@@ -1,0 +1,85 @@
+<!--
+ * @Author: giunfa.vong
+ * @LastEditors: giunfa.vong
+ * @Date: 2021-06-10 20:54:05
+ * @LastEditTime: 2021-06-11 14:44:05
+ * @Description: 
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .tri-test {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(360deg, #ff1e0f 0%, #ff7044 100%);
+        width: 4px;
+        height: 200px;
+        transform: rotate(135deg) translatez(0);
+        margin: 0 auto;
+      }
+      .tri-test:before,
+      .tri-test:after {
+        position: absolute;
+        content: "";
+      }
+      .tri-test:before,
+      .tri-test:after {
+        border-left: 2px solid transparent;
+        border-right: 2px solid transparent;
+        border-bottom: 200px solid #fff;
+      }
+      .tri-test:before {
+        margin-left: -2px;
+      }
+      .tri-test:after {
+        margin-left: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="tri-test"></div> -->
+    <canvas id="canvas"></canvas>
+  </body>
+  <script>
+    const draw = () => {
+      var canvas = document.getElementById("canvas"); //获取canvas对象
+
+      var ctx = canvas.getContext("2d"); //创建二维的绘图上下文对象
+
+      ctx.beginPath();
+
+      ctx.moveTo(50, 0);
+
+      ctx.lineTo(100, 0);
+      ctx.lineTo(100, 25);
+      ctx.lineTo(125, 25);
+      ctx.lineTo(75, 50);
+      ctx.lineTo(25, 25);
+      ctx.lineTo(50, 25);
+
+      ctx.lineJoin = "round"; //两条线交汇时的边角类型(miter 尖角默认 bevel斜角 round 圆角 )
+
+      ctx.closePath(); //closePath() 关闭路径 闭合
+
+      var grd = ctx.createLinearGradient(0, 0, 200, 0);
+      grd.addColorStop(0, "red");
+      grd.addColorStop(1, "white");
+
+      ctx.fillStyle = grd;
+
+      ctx.lineWidth = 10;//设置边框大写
+
+      ctx.strokeStyle = grd;//填充边框颜色
+
+      ctx.fill(); // 填充
+
+      ctx.stroke();
+    };
+    draw();
+  </script>
+</html>
